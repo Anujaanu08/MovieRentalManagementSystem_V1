@@ -13,13 +13,21 @@ namespace MovieRentalManagementSystem_V1
         public void CreateMovie(Movie movie)
         {
             movies.Add(movie);
+            Console.WriteLine("Movie Added successfully");
         }
 
         public void ReadMovies()
         {
-            foreach (var movie in movies)
+            if (movies.Count > 0)
             {
-                Console.WriteLine(movie.ToString());
+                foreach (var movie in movies)
+                {
+                    Console.WriteLine(movie.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine("No movies found ");
             }
             Console.ReadLine();
         }
@@ -28,14 +36,16 @@ namespace MovieRentalManagementSystem_V1
         {
             var mov = movies.Find(x=>x.movieId==movie.movieId);
             if (mov != null) {
-             mov.title = movie.title;
+                mov.title = movie.title;
                 mov.rentalPrice = movie.rentalPrice;
                 mov.director = movie.director;
+                Console.WriteLine("Movie updated successfully");
             }
             else
             {
                 Console.WriteLine("Invalid id");
             }
+            Console.ReadLine();
         }
 
         public void DeleteMovie(string id) {
@@ -43,11 +53,13 @@ namespace MovieRentalManagementSystem_V1
             if (mov != null)
             {
                movies.Remove(mov);
+                Console.WriteLine("Movie deleted successfully");
             }
             else
             {
                 Console.WriteLine("Invalid id");
             }
+            Console.ReadLine ();
         }
 
     }
