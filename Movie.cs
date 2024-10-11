@@ -14,12 +14,15 @@ namespace MovieRentalManagementSystem_V1
         public string director;
         public string rentalPrice;
 
+        static int TotalMovies=0;
         public Movie(string movieId, string title, string director, string rentalPrice)
         {
             this.movieId = movieId;
             this.title = title;
             this.director = director;
             this.rentalPrice = rentalPrice;
+            TotalMovies++;
+            //Console.WriteLine(TotalMovies);
         }
 
         public override string ToString()

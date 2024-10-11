@@ -17,7 +17,7 @@ namespace MovieRentalManagementSystem_V1
 
         public override string DisplayMovieInfo() 
         {
-            return $"{base.ToString()} Format{Format} FileSize{FileSize}";
+            return $"{base.ToString()} Format : {Format} FileSize : {FileSize}";
         }
     }
 }

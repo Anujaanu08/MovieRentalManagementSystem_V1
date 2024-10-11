@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +14,7 @@ namespace MovieRentalManagementSystem_V1
       
         public void CreateMovie(Movie movie)
         {
+           // movie.rentalPrice = ValidateMovieRentalPrice(movie.rentalPrice);
             movies.Add(movie);
             Console.WriteLine("Movie Added successfully");
         }
@@ -22,7 +25,7 @@ namespace MovieRentalManagementSystem_V1
             {
                 foreach (var movie in movies)
                 {
-                    Console.WriteLine(movie.ToString());
+                    Console.WriteLine(movie.DisplayMovieInfo());
                 }
             }
             else
@@ -32,13 +35,20 @@ namespace MovieRentalManagementSystem_V1
             Console.ReadLine();
         }
 
-        public void UpdateMovie(Movie movie)
+        public void UpdateMovie(string id)
         {
-            var mov = movies.Find(x=>x.movieId==movie.movieId);
+            var mov = movies.Find(x=>x.movieId==id);
             if (mov != null) {
-                mov.title = movie.title;
-                mov.rentalPrice = movie.rentalPrice;
-                mov.director = movie.director;
+                Console.Write("Enter Movie Title: ");
+                string newtitle = Console.ReadLine();
+                Console.Write("Enter Movie Director: ");
+                string newdirector = Console.ReadLine();
+                Console.Write("Enter Movie rental price: ");
+                string newprice =Console.ReadLine();
+                mov.title = newtitle;
+                mov.rentalPrice = newprice;
+                mov.director = newdirector;
+
                 Console.WriteLine("Movie updated successfully");
             }
             else
@@ -62,5 +72,16 @@ namespace MovieRentalManagementSystem_V1
             Console.ReadLine ();
         }
 
+
+        public int ValidateMovieRentalPrice(int pri) 
+        {
+          
+            while (pri <= 0) 
+            {
+            Console.Write("Enter a positive price : ");
+                pri = int.Parse(Console.ReadLine());   
+            }
+            return pri;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,17 @@ namespace MovieRentalManagementSystem_V1
         static int id = 001;
         static void Main(string[] args)
         {
-            Movie Movie1 = new Movie("MOVIE_001", "Titanic", "James Cameroon", "1.00");
-           Console.WriteLine( Movie1.ToString());
-            menu();
+            
+            //var mo = new DVDMovie("MOVIE_001", "Titanic", "James Cameroon", "1.00")
+            //{
+            //    Format= "hhh",
+            //    FileSize = "ss"
+            //};
+          // Console.WriteLine( mo.DisplayMovieInfo());
+            //Movie Movie1 = new Movie("MOVIE_001", "Titanic", "James Cameroon", "1.00");
+           // Console.WriteLine(Movie1.DisplayMovieInfo());
+            //Console.ReadLine();
+           menu();
            
         }
 
@@ -40,8 +49,39 @@ namespace MovieRentalManagementSystem_V1
                         string director = Console.ReadLine();
                         Console.Write("Enter Movie rental price: ");
                         string price = Console.ReadLine();
-                        movieManager.CreateMovie(new Movie($"Movie_{id}", price, title, director));
-                        id++;
+                        Console.Write("Enter Movie type (1 : DVDMovie , 2 : Digitalmovie): ");
+                        string type = Console.ReadLine();
+                        if(type == "1")
+                        {
+                            Console.Write("Enter Movie FileSize: ");
+                            string filesize  = Console.ReadLine();
+                            Console.Write("Enter Movie format: ");
+                            string format = Console.ReadLine();
+                            movieManager.CreateMovie(new DVDMovie($"Movie_{id}", price, title, director)
+                            {
+                                Format = filesize,
+                                FileSize = format
+                            });
+                            id++;
+                        }
+                        else if(type == "2")
+                        {
+                            Console.Write("Enter Movie Duration: ");
+                            string Duration = Console.ReadLine();
+                            Console.Write("Enter Movie DiscWeight: ");
+                            string DiscWeight = Console.ReadLine();
+                            movieManager.CreateMovie(new DigitalMovie($"Movie_{id}", price, title, director)
+                            {
+                                DiscWeight = DiscWeight,
+                                Duration = Duration
+                            });
+                            id++;
+                        }
+                        else
+                        {
+                            Console.WriteLine("invalid option");
+                        }
+                     
                         Console.ReadLine();
                         break;
                     case 2:
@@ -51,14 +91,8 @@ namespace MovieRentalManagementSystem_V1
                     case 3:
                         Console.Write("Enter the movie id to update : ");
                         string movid = Console.ReadLine();
-                        Console.Write("Enter Movie Title: ");
-                        string newtitle = Console.ReadLine();
-                        Console.Write("Enter Movie Director: ");
-                        string newdirector = Console.ReadLine();
-                        Console.Write("Enter Movie rental price: ");
-                        string newprice = Console.ReadLine();
-                        movieManager.UpdateMovie(new Movie(movid, newtitle, newdirector, newprice));
-                        break;
+                        movieManager.UpdateMovie(movid);
+                         break;
                     case 4:
                         Console.Write("Enter the movie id to delete : ");
                         string delid = Console.ReadLine();
