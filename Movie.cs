@@ -9,10 +9,10 @@ namespace MovieRentalManagementSystem_V1
 {
     internal class Movie
     {
-        private string movieId;
-        private string title;
-        private string director;
-        private string rentalPrice;
+        public string movieId;
+        public  string title;
+        public string director;
+        public string rentalPrice;
 
         public Movie(string movieId, string title, string director, string rentalPrice)
         {
