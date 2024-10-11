@@ -10,7 +10,7 @@ namespace MovieRentalManagementSystem_V1
     internal class Movie
     {
         public string movieId;
-        public  string title;
+        public string title;
         public string director;
         public string rentalPrice;
 
@@ -26,5 +26,11 @@ namespace MovieRentalManagementSystem_V1
         {
             return $"movieIdId: {movieId}, title: {title}, director: {director}, rentalPrice: {rentalPrice}";
         }
+
+        public virtual string DisplayMovieInfo()
+        {
+            return ToString();
+        }
+
     }
 }
